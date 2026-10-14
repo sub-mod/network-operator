@@ -1,0 +1,14 @@
+Captured fresh ERNIC-backed run: 2026-10-14
+Mock environment: 941da8862a241a77d4b91793fa3c972033418725
+Production operator source unchanged from ROCm main df08b06e068ac8724660ae69320d6eaa52032131
+
+I1014 16:10:25.742115       1 main.go:98] "Creating manager" logger="amd-network.setup" version="undefined" git commit="d287af2f5bcad70a214ecd9717f072be53760f39" build tag="undefined"
+Observed worker NIC allocatable: 1
+PASS: controller runs checkout-built image with SIM_ENABLE=false
+PASS: same worker, AMD DRA claim -> matching injected GPU, Network Operator NIC -> discovered RDMA device, HTTP simulated response
+PASS: allocated ERNIC PCI device 0000:00:04.0 is bound to real ionic driver
+PASS: second Pod waits for the occupied NIC
+PASS: same worker, AMD DRA claim -> matching injected GPU, Network Operator NIC -> discovered RDMA device, HTTP simulated response
+PASS: checkout operator reconciliation, ERNIC discovery, GPU+NIC allocation, NIC exhaustion and reuse
+0/2 nodes are available: 1 Insufficient amd.com/nic, 1 node(s) didn't match Pod's node affinity/selector. preemption: 0/2 nodes are available: 2 Preemption is not helpful for scheduling.
+0/2 nodes are available: 1 Insufficient amd.com/nic, 1 node(s) didn't match Pod's node affinity/selector. preemption: 0/2 nodes are available: 1 No preemption victims found for incoming pod, 1 Preemption is not helpful for scheduling.

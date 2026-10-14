@@ -56,3 +56,9 @@ Ensure the following tools are installed on the system where the tests will be e
    ```
 
    This will execute all tests for that test suite.
+
+## ERNIC-backed integration
+
+`make test-ernic` tests this operator checkout using the AMD GPU mock project's
+real ERNIC VM worker, GPU DRA allocation and NIC allocation/exhaustion/reuse.
+See [requirements, execution diagram and evidence](ernic/README.md).

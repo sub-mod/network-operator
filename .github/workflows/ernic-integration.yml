@@ -1,0 +1,57 @@
+name: ERNIC integration
+on:
+  workflow_dispatch:
+  push:
+    branches: [test/mock-plugin-readiness]
+  pull_request:
+    paths:
+      - 'api/**'
+      - 'cmd/**'
+      - 'internal/**'
+      - 'tests/ernic/**'
+      - '.github/workflows/ernic-integration.yml'
+permissions:
+  contents: read
+jobs:
+  ernic:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 35
+    env:
+      CONTAINER_RUNTIME: docker
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: azure/setup-helm@v4
+      - uses: helm/kind-action@v1
+        with:
+          version: v0.33.0
+          kubectl_version: v1.37.0
+          install_only: true
+      - name: Docker and guest prerequisites
+        run: |
+          docker info
+          test -c /dev/net/tun || sudo modprobe tun
+          df -h .
+      - name: Test checkout against published ERNIC environment
+        run: make test-ernic
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ernic-integration-evidence
+          path: |
+            tests/.ernic/allocation-first.log
+            tests/.ernic/allocation-second.log
+            tests/.ernic/pci-proof.log
+            tests/.ernic/exhaustion.log
+            tests/.ernic/result.txt
+            tests/.ernic/nodes.json
+            tests/.ernic/events.json
+            tests/.ernic/device-plugin.json
+            tests/.ernic/controller-deployments.json
+            tests/.ernic/operator.log
+            tests/.ernic/cleanup.log
+            tests/.ernic/worker/worker-console.log
+            tests/.ernic/worker/ernic.log
+            tests/.ernic/worker/qemu.log

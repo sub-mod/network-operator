@@ -18,3 +18,6 @@ nodeapp
 # Sphinx documentation
 _build/
 .venv/
+
+# ERNIC integration artifacts, logs, guest disk and private bootstrap material
+/tests/.ernic/

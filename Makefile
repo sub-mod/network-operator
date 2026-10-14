@@ -727,3 +727,7 @@ utils-push: ## Push utils docker image
 .PHONY: utils-save
 utils-save: ## Save utils docker image as tar.gz
 	$(CONTAINER_ENGINE) save $(UTILS_IMG) | gzip > $(UTILS_CONTAINER_IMG).tar.gz
+
+.PHONY: test-ernic
+test-ernic: ## Test this checkout against amd-gpu-mock's real ERNIC worker.
+	bash tests/ernic/run.sh

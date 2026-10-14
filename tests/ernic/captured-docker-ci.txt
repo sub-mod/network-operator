@@ -1,0 +1,13 @@
+Hosted ARM64 Docker validation — 2026-10-14
+Candidate: 0df24f7214133fe73b8d0982bfdac918e78f1c8f
+AMD GPU mock: 4bfb27db112ffb721de5b3b1bc05ffdebd566435
+Run: https://github.com/sub-mod/network-operator/actions/runs/38611876019
+Result: success
+Selected verbatim test output:
+
+2026-10-14T18:25:02.1405609Z PASS: controller runs checkout-built image with SIM_ENABLE=false
+2026-10-14T18:28:32.2250183Z PASS: same worker, AMD DRA claim -> matching injected GPU, Network Operator NIC -> discovered RDMA device, HTTP simulated response
+2026-10-14T18:28:36.0819694Z PASS: allocated ERNIC PCI device 0000:00:04.0 is bound to real ionic driver
+2026-10-14T18:28:36.7171304Z PASS: second Pod waits for the occupied NIC
+2026-10-14T18:29:16.2420045Z PASS: same worker, AMD DRA claim -> matching injected GPU, Network Operator NIC -> discovered RDMA device, HTTP simulated response
+2026-10-14T18:29:16.2453497Z PASS: checkout operator reconciliation, ERNIC discovery, GPU+NIC allocation, NIC exhaustion and reuse
